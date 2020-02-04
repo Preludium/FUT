@@ -1,5 +1,6 @@
 HELP.md
 target/
+*.mdj
 
 ### STS ###
 .apt_generated
@@ -18,6 +19,7 @@ target/
 out/
 
 ### Java ###
+package.json
 
 # Compiled class file
 *.class
