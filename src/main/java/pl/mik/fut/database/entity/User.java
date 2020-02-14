@@ -11,8 +11,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "users")
 public class User {
-    private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,20 +25,33 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column
+    @Size(min = 3, max = 25)
+    @Column(nullable = false)
+    private String clubName;
+
     private int coins;
 
-    @Column
     private int level;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "transfer_lists_id")
+    private TransferList transferList;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "inventories_id")
+    private Inventory inventory;
 
     public User() {
 
     }
 
-    public User(@NotNull String login, @NotNull String password) {
+    public User(@NotNull String login, @NotNull String password, String clubName, TransferList transferList, Inventory inventory) {
         this.login = login;
         this.password = password;
         this.coins = 0;
         this.level = 0;
+        this.clubName = clubName;
+        this.transferList = transferList;
+        this.inventory = inventory;
     }
 }
